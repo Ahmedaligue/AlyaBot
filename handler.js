@@ -322,11 +322,11 @@ continue
                 else
 m.exp += xp
 if (!isPrems && plugin.limit && global.db.data.users[m.sender].limit < plugin.limit * 1) {
-conn.sendMessage(m.chat, {text: `*⚠ 𝐒𝐮𝐬 𝐝𝐢𝐚𝐦𝐚𝐧𝐭𝐞 💎 𝐬𝐞 𝐡𝐚𝐧 𝐚𝐠𝐨𝐭𝐚𝐝𝐨 𝐩𝐮𝐞𝐝𝐞 𝐜𝐨𝐦𝐩𝐫𝐚𝐫 𝐦𝐚𝐬 𝐮𝐬𝐚𝐧𝐝𝐨 𝐞𝐥 𝐜𝐨𝐦𝐚𝐧𝐝𝐨:* #buy`, contextInfo: {externalAdReply : {mediaUrl: null, mediaType: 1, description: null, "title": wm, body: '', previewType: 0, "thumbnail": img.getRandom(), sourceUrl: [nna, md, yt, nn, tiktok].getRandom()}}}, { quoted: m })         
+conn.sendMessage(m.chat, {text: `*⚠️ ألماسك 💎 قد نفد، يمكنك شراء المزيد باستخدام الأمر:* #buy`, contextInfo: {externalAdReply : {mediaUrl: null, mediaType: 1, description: null, "title": wm, body: '', previewType: 0, "thumbnail": img.getRandom(), sourceUrl: [nna, md, yt, nn, tiktok].getRandom()}}}, { quoted: m })         
 continue
 }
 if (plugin.level > _user.level) {
-conn.sendMessage(m.chat, {text: `*⚠️𝐍𝐞𝐜𝐞𝐬𝐢𝐭𝐚 𝐞𝐥 𝐧𝐢𝐯𝐞𝐥 ${plugin.level} 𝐩𝐚𝐫𝐚 𝐩𝐨𝐝𝐞𝐫 𝐮𝐬𝐚𝐫 𝐞𝐬𝐭𝐞 𝐜𝐨𝐦𝐚𝐧𝐝𝐨, 𝐓𝐮 𝐧𝐢𝐯𝐞𝐥 𝐚𝐜𝐭𝐮𝐚𝐥 𝐞𝐬:* ${_user.level}`, contextInfo: {externalAdReply : {mediaUrl: null, mediaType: 1, description: null, "title": wm, body: '', previewType: 0, "thumbnail": img.getRandom(), sourceUrl: [nna, md, yt, nn, tiktok].getRandom()}}}, { quoted: m })         
+conn.sendMessage(m.chat, {text: `*⚠️ تحتاج إلى المستوى ${plugin.level} لاستخدام هذا الأمر، مستواك الحالي هو:* ${_user.level}`, contextInfo: {externalAdReply : {mediaUrl: null, mediaType: 1, description: null, "title": wm, body: '', previewType: 0, "thumbnail": img.getRandom(), sourceUrl: [nna, md, yt, nn, tiktok].getRandom()}}}, { quoted: m })         
 continue // Si no se ha alcanzado el nivel
 }
 let extra = {match, usedPrefix, noPrefix, _args, args, command, text, conn: this, participants, groupMetadata, user, bot, isROwner, isOwner, isRAdmin, isAdmin,  isBotAdmin, isPrems, chatUpdate, __dirname: ___dirname, __filename }
@@ -352,8 +352,8 @@ await plugin.after.call(this, m, extra)
 } catch (e) {
 console.error(e)
 }}
-if (m.limit) m.reply(`*${+m.limit}* 𝘿𝙞𝙖𝙢𝙖𝙣𝙩𝙚 💎 𝙪𝙨𝙖𝙙𝙤𝙨`)
-if (m.money) m.reply(+m.money + ' 𝙇𝙤𝙡𝙞𝘾𝙤𝙞𝙣𝙨 𝙪𝙨𝙖𝙙𝙤𝙨') 
+if (m.limit) m.reply(`*${+m.limit}* من الجواهر 💎 تم استخدامها`)
+if (m.money) m.reply(+m.money + ' من النقود تم استخدامه') 
 }
 break
 }}} catch (e) {
@@ -410,7 +410,7 @@ if (opts['autoread']) await this.readMessages([m.key])
 if (settingsREAD.autoread2) await this.readMessages([m.key])  
 //if (settingsREAD.autoread2 == 'true') await this.readMessages([m.key])    
 	    
-if (!m.fromMem && m.text.match(/(albina|alya|Botsito|Gata|:v)/gi)) {
+if (!m.fromMem && m.text.match(/(بوت|احمد|212625457341|سينكو|:v)/gi)) {
 let emot = pickRandom(["😺", "😸", "😹", "😻", "😼", "😽", "🙀", "😿", "😾", "🤩", "😏", "😳", "🥵", "🤯", "😱", "😨", "🤫", "🥴", "🤧", "🤑", "🤠", "🤖", "🤝", "💪", "👑", "😚", "🐱", "🐈", "🐆", "🐅", "⚡️", "🌈", "☃️", "⛄️", "🌝", "🌛", "🌜", "🍓", "🍎", "🎈", "🪄", "❤️", "🧡", "💛", "💚", "💙", "💜", "🖤", "🤍", "💘", "💝", "💟", "🌝", "😎", "🔥", "🖕", "🐦"])
 this.sendMessage(m.chat, { react: { text: emot, key: m.key }})}
 function pickRandom(list) { return list[Math.floor(Math.random() * list.length)]}}}
@@ -443,11 +443,11 @@ let apii = await this.getFile(pp)
 const botTt2 = groupMetadata.participants.find(u => this.decodeJid(u.id) == this.user.jid) || {} 
 const isBotAdminNn = botTt2?.admin === "admin" || false
 text = (action === 'add' ? (chat.sWelcome || this.welcome || conn.welcome || 'Welcome, @user!').replace('@subject', await this.getName(id)).replace('@desc', groupMetadata.desc?.toString() || '*ᴜɴ ɢʀᴜᴘᴏ ɢᴇɴɪᴀ😸*\n *sɪɴ ʀᴇɢʟᴀ 😉*') :
-(chat.sBye || this.bye || conn.bye || 'Bye, @user!')).replace('@user', '@' + user.split('@')[0])
+(chat.sBye || this.bye || conn.bye || 'ودعا, @user!')).replace('@user', '@' + user.split('@')[0])
 if (chat.antifake && isBotAdminNn && action === 'add') {
-const numerosPermitidos = ["212", "265", "92", "91", "90", "210", "60", "61", "62", "40", "48", "49", "93", "94", "98", "258"] //PUEDES EDITAR LOS USUARIOS QUE SE ELIMINARÁN SI EMPIEZA POR CUALQUIER DE ESOS NÚMEROS	
+const numerosPermitidos = ["1", "265", "92", "91", "90", "210", "60", "61", "62", "40", "48", "49", "93", "94", "98", "258"] //PUEDES EDITAR LOS USUARIOS QUE SE ELIMINARÁN SI EMPIEZA POR CUALQUIER DE ESOS NÚMEROS	
 if (numerosPermitidos.some(num => user.startsWith(num))) {	
-this.sendMessage(id, { text: `@${user.split("@")[0]} Nos numero fake no esta permitido el este grupo hasta la próxima...`, mentions: [user] }, { quoted: null });          
+this.sendMessage(id, { text: `@${user.split("@")[0]} الأرقام المزيفة غير مسموح بها في هذه المجموعة حتى المرة القادمة...`, mentions: [user] }, { quoted: null });          
 let responseb = await this.groupParticipantsUpdate(id, [user], 'remove')
 if (responseb[0].status === "404") return      
 return    
@@ -505,10 +505,10 @@ const id = groupUpdate.id
 if (!id) continue
 let chats = global.db.data.chats[id], text = ''
 if (!chats?.detect) continue
-// if (groupUpdate.desc) text = (chats.sDesc || this.sDesc || conn.sDesc || '```Description has been changed to```\n@desc').replace('@desc', groupUpdate.desc)
-//if (groupUpdate.subject) text = (chats.sSubject || this.sSubject || conn.sSubject || '```Subject has been changed to```\n@subject').replace('@subject', groupUpdate.subject)
-//if (groupUpdate.icon) text = (chats.sIcon || this.sIcon || conn.sIcon || '```Icon has been changed to```').replace('@icon', groupUpdate.icon)
-if (groupUpdate.revoke) text = (chats.sRevoke || this.sRevoke || conn.sRevoke || '```Group link has been changed to```\n@revoke').replace('@revoke', groupUpdate.revoke)
+// if (groupUpdate.desc) text = (chats.sDesc || this.sDesc || conn.sDesc || '```تم تغيير الوصف الى```\n@desc').replace('@desc', groupUpdate.desc)
+//if (groupUpdate.subject) text = (chats.sSubject || this.sSubject || conn.sSubject || '```تم تغير الاسم الى```\n@subject').replace('@subject', groupUpdate.subject)
+//if (groupUpdate.icon) text = (chats.sIcon || this.sIcon || conn.sIcon || '```تم تغيير الصوره```').replace('@icon', groupUpdate.icon)
+if (groupUpdate.revoke) text = (chats.sRevoke || this.sRevoke || conn.sRevoke || '```تم تغيير رابط المجموعه الى```\n@revoke').replace('@revoke', groupUpdate.revoke)
 if (!text) continue
 await this.sendMessage(id, { text, mentions: this.parseMention(text) })
 }}
@@ -547,17 +547,17 @@ console.error(e)
 }}
 
 global.dfail = (type, m, conn, usedPrefix) => {
-    let msg = {
-        rowner: '🌸 Ukyuu~ ¡Ups! Este comando es exclusivo para mi querido propietario~ 💻💞 Pero no te preocupes, senpai~ ¡Hay muchas otras cositas que puedes probar conmigo! ❄️💋✨',
-        owner: '🌸 Ukyuu~ ¡Ups! Este comando es exclusivo para mi querido propietario~ 💻💞 Pero no te preocupes, senpai~ ¡Hay muchas otras cositas que puedes probar conmigo! ❄️💋✨',
-        mods: '🌸 Ukyuu~ Este comando solo puedo usarlo yo, da~ 💻✨ Privilegios de mod encantadora~ 😘💅🏻 Pero no te pongas celoso, senpai~ ¡Hay muchas otras cosas que tú también puedes disfrutar conmigo~! ❄️💞',
-        premium: '🌸 Ukyuu~ Este comando es solo para usuarios Premium, da~ 💎✨ Ser VIP tiene sus beneficios, ¿verdad que suena tentador, senpai~? 💋🌟',
-        group: '🌸 Ukyuu~ Este comando sólo funciona en grupos, da~ 💬❄️ ¿Por qué no me invitas a uno, senpai~? Prometo portarme linda~ 💋✨',
-        private: '🌸 Ukyuu~ Vamos al privado, da~ 💌🤫 Este comando solo funciona en el privado del bot~ Shshh… hablemos a solas, senpai~ 💋❄️',
-        admin: '🌸 Ukyuu~ Lo siento, senpai... 😳 Solo los admins pueden usar este comando~ 🛡️❄️ ¡Alya necesita que un admin esté aquí para ayudarte mejor! 💋✨',
-        botAdmin: '🌸 Ukyuu~ Haz admin a mí, Alya, senpai~ 💻💕 Sin admin, no puedo usar este comando, da! ❄️💋 ¡Así que hazlo rápido, por favor~! ✨🫶🏻',
-        unreg: '🌸 Ukyuu~ Uy, no apareces en mi base de datos, senpai... \n Para poder jugar conmigo, necesitas registrarte~ \n✨ 📋 Comando: #reg nombre.edad \n 💡 Ejemplo: #reg Alya.18 \n ¡No te tardes, da~! 🩵💻💫',
-        restrict: '🔐 Ukyuu~ Este comando está desactivado por mi jefe, senpai... ❄️💼 Lo siento, no puedo usarlo ahora mismo~ 🥺💖'
+   let msg = {
+        rowner: '🌸 أوبس! هذا الأمر حصري لمالكي العزيز~ 💻💞 لكن لا تقلق، سنباي~ هناك الكثير من الأشياء الأخرى التي يمكنك تجربتها معي! ❄️💋✨',
+        owner: '🌸~ أوبس! هذا الأمر حصري لمالكي العزيز~ 💻💞 لكن لا تقلق، سنباي~ هناك الكثير من الأشياء الأخرى التي يمكنك تجربتها معي! ❄️💋✨',
+        mods: '🌸~ هذا الأمر يمكنني استخدامه فقط، دا~ 💻✨ امتيازات مود ساحرة~ 😘💅🏻 لكن لا تغار، سنباي~ هناك الكثير من الأشياء الأخرى التي يمكنك الاستمتاع بها معي أيضًا~! ❄️💞',
+        premium: '🌸 ~ هذا الأمر فقط للمستخدمين المميزين، دا~ 💎✨ كونك VIP له مزاياه، أليس كذلك يبدو مغريًا، سنباي~? 💋🌟',
+        group: '🌸~ هذا الأمر يعمل فقط في المجموعات، دا~ 💬❄️ لماذا لا تدعوني إلى واحدة، سنباي~? أعدك بأن أكون لطيفة~ 💋✨',
+        private: '🌸 ~ دعنا نذهب إلى الخاص، دا~ 💌🤫 هذا الأمر يعمل فقط في الخاص مع البوت~ ششش… دعنا نتحدث لوحدنا، سنباي~ 💋❄️',
+        admin: '🌸 ~ آسف، سنباي... 😳 فقط الإداريون يمكنهم استخدام هذا الأمر~ 🛡️❄️ أليا تحتاج إلى إداري هنا لمساعدتك بشكل أفضل! 💋✨',
+        botAdmin: '🌸~ اجعلني إدارية، أليا، سنباي~ 💻💕 بدون إدارية، لا أستطيع استخدام هذا الأمر، دا! ❄️💋 لذا افعل ذلك بسرعة، من فضلك~! ✨🫶🏻',
+        unreg: '🌸~ أوي، لا تظهر في قاعدة بياناتي، سنباي... \n للعب معي، تحتاج إلى التسجيل~ \n✨ 📋 الأمر: #reg الاسم.العمر \n 💡 مثال: #reg Alya.18 \n لا تتأخر، دا~! 🩵💻💫',
+        restrict: '🔐 هذا الأمر معطل من قبل رئيسي، سنباي... ❄️💼 آسف، لا أستطيع استخدامه الآن~ 🥺💖'
     }[type]
     if (msg) return conn.sendMessage(m.chat, { 
     text: msg, 
