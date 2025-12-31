@@ -15,7 +15,7 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
   const isSupportedImage = /^image\/(jpe?g|png|webp|gif)$/.test(mime)
 
   if (!text && !isSupportedImage) {
-    return conn.reply(m.chat, `💡 Envía o responde a una imagen (jpg, png, webp, gif) con una pregunta.\n\nEjemplo:\n${usedPrefix + command} ¿Qué ves en esta imagen?`, m)
+    return conn.reply(m.chat, `💡 أرسل أو رد على صورة (jpg, png, webp, gif) مع سؤال.\n\nمثال:\n${usedPrefix + command} ماذا ترى في هذه الصورة؟`, m)
   }
 
   try {
@@ -37,7 +37,7 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
       const sizeInMB = buffer.length / (1024 * 1024)
       if (sizeInMB > MAX_IMAGE_SIZE_MB) {
         await m.react('⚠️')
-        return conn.reply(m.chat, `⚠️ La imagen es demasiado grande (${sizeInMB.toFixed(2)} MB). Límite: ${MAX_IMAGE_SIZE_MB} MB.`, m)
+        return conn.reply(m.chat, `⚠️ الصورة كبيرة جداً (${sizeInMB.toFixed(2)} MB). الحد الأقصى: ${MAX_IMAGE_SIZE_MB} MB.`, m)
       }
 
       base64Image = `data:${mime};base64,${buffer.toString('base64')}`
@@ -57,24 +57,24 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
       body: JSON.stringify(body)
     })
 
-    if (!res.ok) throw `🌐 Error en la API: ${res.status} ${res.statusText}`
+    if (!res.ok) throw `🌐 خطأ في الـ API: ${res.status} ${res.statusText}`
 
     const data = await res.json()
     const respuesta = data?.candidates?.[0]?.content?.parts?.[0]?.text
 
-    if (!respuesta) throw '❌ No se recibió respuesta válida de la IA.'
+    if (!respuesta) throw '❌ لم يتم تلقي رد صالح من الذكاء الاصطناعي.'
 
     await m.reply(respuesta.trim())
 
   } catch (e) {
     console.error('[❌ Gemini Plugin Error]', e)
     await m.react('⚠️')
-    await conn.reply(m.chat, '⚠️ Ocurrió un error procesando la imagen o pregunta. Intenta de nuevo más tarde.', m)
+    await conn.reply(m.chat, '⚠️ حدث خطأ في معالجة الصورة أو السؤال. حاول مرة أخرى لاحقاً.', m)
   }
 }
 
 handler.command = ['gemini', 'geminis']
-handler.help = ['gemini <pregunta>']
+handler.help = ['gemini <سؤال>']
 handler.tags = ['ai']
 handler.group = false // ponlo en true si quieres que funcione también en grupos
 
