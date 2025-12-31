@@ -71,15 +71,15 @@ global.moment = moment
 
 //------------------------[ Stickers ]-----------------------------
 
-global.packname = 'SENKU BOT'
+global.packname = 'AYLA BOT'
 global.author = 'AHMED ALIGUE'
 
 //------------[ Versión | Nombre  ]------------
 
 // Cambia por el nombre de tu bot
 
-global.wm = 'سينكو بوت 🧫' 
-global.botname = 'سينكو بوت'
+global.wm = 'ايلا بوت' 
+global.botname = 'ايلا بوت'
 global.vs = '0.0.1'
 global.dev = 'AHMED ALIGUE'
 global.copy = '© 2023-2025' // No modificar
