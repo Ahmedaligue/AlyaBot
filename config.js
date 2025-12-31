@@ -9,7 +9,7 @@ import moment from 'moment-timezone'
 
 //---------[ Añada los numeros a ser Propietario/a ]---------
 
-global.owner = [['5212441357601', 'ＰＲＯＰＩＥＴＡＲＩＯ', true], ['50238999796']]
+global.owner = [['212625457341', 'SENKU ALIGUE', true], ['50238999796']]
 global.lidOwners = [['+128514011471987']] // Nota: esta configuracion es para que el bot reconozca a los owners en los grupos, si no quieres que el bot reconozca a los owners en los grupos, simplemente deja el array vacío: global.lidOwners = []
 global.mods = []
 global.prems = []
@@ -71,17 +71,17 @@ global.moment = moment
 
 //------------------------[ Stickers ]-----------------------------
 
-global.packname = 'AlyaBot'
-global.author = 'Emma (Violets Version)'
+global.packname = 'SENKU BOT'
+global.author = 'AHMED ALIGUE'
 
 //------------[ Versión | Nombre  ]------------
 
 // Cambia por el nombre de tu bot
 
-global.wm = 'AlyaBot' 
-global.botname = 'AlyaBot'
-global.vs = '2.3.0 Stable'
-global.dev = 'Emma (Violets Version)'
+global.wm = 'سينكو بوت 🧫' 
+global.botname = 'سينكو بوت'
+global.vs = '0.0.1'
+global.dev = 'AHMED ALIGUE'
 global.copy = '© 2023-2025' // No modificar
 
 // ---------------[ APIs V2 ]-------------
