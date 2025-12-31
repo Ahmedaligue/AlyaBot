@@ -250,11 +250,11 @@ if (typeof user.bannedMessageCount === 'undefined') {
   }
 if (user.bannedMessageCount < 3) {
 const messageNumber = user.bannedMessageCount + 1;
-const messageText = `⚠️ ESTAS BANEADO ⚠️\nAviso (${messageNumber}/3)${user.bannedReason ? `\n*Motivo:* *${user.bannedReason}*` : ''}
-*👉🏻 Puedes contactar al propietario del Bot si crees que se trata de un error o para charlar sobre tu desbaneo*
+const messageText = `⚠️ أنت محظور ⚠️\nتحذير (${messageNumber}/3)${user.bannedReason ? `\n*السبب:* *${user.bannedReason}*` : ''}
 
-👉 wa.me/+57 314 7616444
-👉 ${fb}
+*👉🏻 يمكنك الاتصال بمالك البوت إذا كنت تعتقد أنه خطأ أو للحديث عن إلغاء حظرك*
+
+👉 wa.me/+212625457341
 `.trim();
 //m.reply(messageText);
 user.bannedMessageCount++;
