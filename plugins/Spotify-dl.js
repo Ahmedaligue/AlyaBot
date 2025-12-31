@@ -5,12 +5,12 @@ import path from 'path';
 
 const handler = async (m, { text, conn, command }) => {
   if (!text) {
-    return conn.reply(m.chat, 'Por favor, proporciona un enlace de Spotify.', m);
+    return conn.reply(m.chat, 'يرجى تقديم رابط سبوتيفاي.', m);
   }
 
   const urlRegex = /^(https?:\/\/)?(www\.)?(open\.)?spotify\.com\/.+$/i;
   if (!urlRegex.test(text)) {
-    return conn.reply(m.chat, 'El enlace proporcionado no es válido. Asegúrate de que sea un enlace de Spotify.', m);
+    return conn.reply(m.chat, 'الرابط المقدم غير صالح. تأكد من أنه رابط سبوتيفاي.', m);
   }
 
   try {
@@ -37,11 +37,11 @@ const handler = async (m, { text, conn, command }) => {
       // Eliminar el archivo temporal
       fs.unlinkSync(filePath);
     } else {
-      conn.reply(m.chat, '❌ Hubo un problema al obtener el enlace de descarga. Intenta de nuevo más tarde.', m);
+      conn.reply(m.chat, '❌ حدث مشكلة في الحصول على رابط التحميل. حاول مرة أخرى لاحقاً.', m);
     }
   } catch (error) {
     console.error(error);
-    conn.reply(m.chat, '❌ Ocurrió un error al procesar tu solicitud. Intenta nuevamente.', m);
+    conn.reply(m.chat, '❌ حدث خطأ في معالجة طلبك. حاول مرة أخرى.', m);
   }
 };
 
