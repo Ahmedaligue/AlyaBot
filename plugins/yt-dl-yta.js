@@ -2,23 +2,23 @@ import fetch from 'node-fetch';
 
 const handler = async (m, { conn, text, command }) => {
   if (!text) {
-    return conn.reply(m.chat, '❌ Por favor proporciona un enlace válido de YouTube.', m);
+    return conn.reply(m.chat, '❌ يرجى تقديم رابط يوتيوب صالح.', m);
   }
 
   const servers = [
-    { name: 'Servidor Masha', baseUrl: masha },
-    { name: 'Servidor Alya', baseUrl: alya },
-    { name: 'Servidor Masachika', baseUrl: masachika },
+    { name: 'خادم ماشا', baseUrl: masha },
+    { name: 'خادم أليا', baseUrl: alya },
+    { name: 'خادم ماساتشيكا', baseUrl: masachika },
   ];
 
   // Función para intentar descargar audio de los servidores en orden aleatorio
   async function tryServers(serversList) {
-    if (serversList.length === 0) throw '❌ Todos los servidores fallaron. Intenta más tarde.';
+    if (serversList.length === 0) throw '❌ جميع الخوادم فشلت. حاول لاحقاً.';
 
     const [currentServer, ...rest] = serversList;
 
     try {
-      await conn.reply(m.chat, `🔄 Intentando descargar audio desde ${currentServer.name}...`, m);
+      await conn.reply(m.chat, `🔄 جاري محاولة تحميل الصوت من ${currentServer.name}...`, m);
 
       const apiUrl = `${currentServer.baseUrl}/download_audio?url=${encodeURIComponent(text)}`;
       const res = await fetch(apiUrl);
@@ -27,7 +27,7 @@ const handler = async (m, { conn, text, command }) => {
       const result = await res.json();
 
       if (!result || !result.file_url) {
-        throw new Error('No se recibió URL de audio');
+        throw new Error('لم يتم تلقي رابط الصوت');
       }
 
       return { result, server: currentServer };
@@ -51,7 +51,7 @@ const handler = async (m, { conn, text, command }) => {
       { quoted: m }
     );
 
-    await conn.reply(m.chat, `✅ Audio descargado correctamente desde ${server.name}.`, m);
+    await conn.reply(m.chat, `✅ تم تحميل الصوت بنجاح من ${server.name}.`, m);
 
   } catch (e) {
     console.error(e);
