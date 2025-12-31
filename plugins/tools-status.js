@@ -25,7 +25,7 @@ let handler = async (m, { conn }) => {
     return `${h}h ${m}m ${s}s`;
   };
 
-  // Calcular el porcentaje de uso de CPU (promedio de todos los núcleos)
+  // حساب نسبة استخدام المعالج (متوسط جميع الأنوية)
   const cpuUsagePercent = cpus.map(cpu => {
     const total = Object.values(cpu.times).reduce((acc, tv) => acc + tv, 0);
     const idle = cpu.times.idle;
@@ -39,29 +39,29 @@ let handler = async (m, { conn }) => {
   const cores = cpus.length;
 
   const message = `
-🖥️ *Estado del Bot*
+🖥️ *حالة البوت*
 
-🔹 Plataforma: ${platform} ${arch}
-🔹 CPU: ${cpuModel}
-🔹 Núcleos: ${cores} @ ${cpuSpeed} MHz
-🔹 Uso CPU: ${avgCpuUsage}%
-🔹 Uptime: ${formatTime(uptime)}
+🔹 المنصة: ${platform} ${arch}
+🔹 المعالج: ${cpuModel}
+🔹 عدد الأنوية: ${cores} @ ${cpuSpeed} MHz
+🔹 استخدام المعالج: ${avgCpuUsage}%
+🔹 مدة التشغيل: ${formatTime(uptime)}
 
-💾 Memoria usada: ${format(used.rss)}
-💾 Memoria libre: ${format(freeMem)}
-💾 Memoria total: ${format(totalMem)}
+💾 الذاكرة المستخدمة: ${format(used.rss)}
+💾 الذاكرة الحرة: ${format(freeMem)}
+💾 الذاكرة الكلية: ${format(totalMem)}
 
-⚙️ Carga del sistema:
-   • 1 min: ${load[0].toFixed(2)}
-   • 5 min: ${load[1].toFixed(2)}
-   • 15 min: ${load[2].toFixed(2)}
+⚙️ حمل النظام:
+   • 1 دقيقة: ${load[0].toFixed(2)}
+   • 5 دقائق: ${load[1].toFixed(2)}
+   • 15 دقيقة: ${load[2].toFixed(2)}
 `.trim();
 
   m.reply(message);
 };
 
-handler.help = ['status', 'estado'];
+handler.help = ['status', 'estado', 'حالة'];
 handler.tags = ['info'];
-handler.command =['status', 'estado'];
+handler.command = ['status', 'estado', 'حالة'];
 
 export default handler;
