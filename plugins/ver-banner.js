@@ -10,12 +10,12 @@ let handler = async (m) => {
         : data.default.videos;
 
     if (!videos.length) {
-        m.reply('❌ No hay videos configurados.');
+        m.reply('❌ لا توجد فيديوهات مُهيأة.');
         return;
     }
 
     const videoList = videos.map((url, index) => `${index + 1}. ${url}`).join('\n');
-    m.reply(`🎥 *Videos configurados:*\n\n${videoList}`);
+    m.reply(`🎥 *الفيديوهات المُهيأة:*\n\n${videoList}`);
 };
 
 handler.help = ['viewbanner'];
