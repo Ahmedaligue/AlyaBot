@@ -50,14 +50,14 @@ export async function before(m, { conn, isOwner }) {
 
   if (warns[id] >= 3) {
     await conn.sendMessage(id, {
-      text: '🚫 Ukyuu~ Senpai, has sido bloqueado permanentemente por contactar al bot en privado sin permiso, da~ ❄️💔 \n Lo siento, pero no hay vuelta atrás... \n ¡Por favor, respeta las reglas desde ahora! 🌸⚔️'
+      text: '🚫 Ukyuu~ سنباي، تم حظرك بشكل دائم للتواصل مع البوت في الخاص بدون إذن، دا~ ❄️💔 \n آسف، لكن لا عودة... \n يرجى احترام القواعد من الآن فصاعداً! 🌸⚔️'
     })
     await conn.updateBlockStatus(id, 'block')
   } else {
     await conn.sendMessage(id, {
-      text: `⚠️ Ukyuu~ Senpai, no puedes contactarme en privado, da~ ❄️💻
-Esta es tu advertencia ${warns[id]} de 3…
-Por favor, ten cuidado para no llegar al límite~ 🌸💥`
+      text: `⚠️ Ukyuu~ سنباي، لا يمكنك التواصل معي في الخاص، دا~ ❄️💻
+هذه تحذيرك ${warns[id]} من 3…
+يرجى الحذر لعدم الوصول إلى الحد~ 🌸💥`
     })
   }
 
