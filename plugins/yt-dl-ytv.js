@@ -2,23 +2,23 @@ import fetch from 'node-fetch';
 
 const handler = async (m, { conn, text, command }) => {
   if (!text) {
-    return conn.reply(m.chat, '❌ Por favor proporciona un enlace válido para descargar el video.', m);
+    return conn.reply(m.chat, '❌ يرجى تقديم رابط صالح لتحميل الفيديو.', m);
   }
 
   const servers = [
-    { name: 'Servidor Masha', baseUrl: masha },
-    { name: 'Servidor Alya', baseUrl: alya },
-    { name: 'Servidor Masachika', baseUrl: masachika },
+    { name: 'خادم ماشا', baseUrl: masha },
+    { name: 'خادم أليا', baseUrl: alya },
+    { name: 'خادم ماساتشيكا', baseUrl: masachika },
   ];
 
   // Función para intentar descargar video en servidores en orden aleatorio
   async function tryServers(serversList) {
-    if (serversList.length === 0) throw '❌ Todos los servidores fallaron. Intenta más tarde.';
+    if (serversList.length === 0) throw '❌ جميع الخوادم فشلت. حاول لاحقاً.';
 
     const [currentServer, ...rest] = serversList;
 
     try {
-      await conn.reply(m.chat, `🔄 Intentando descargar video desde ${currentServer.name}...`, m);
+      await conn.reply(m.chat, `🔄 جاري محاولة تحميل الفيديو من ${currentServer.name}...`, m);
 
       const apiUrl = `${currentServer.baseUrl}/download_video?url=${encodeURIComponent(text)}`;
       const res = await fetch(apiUrl);
@@ -27,7 +27,7 @@ const handler = async (m, { conn, text, command }) => {
       const result = await res.json();
 
       if (!result || !result.file_url) {
-        throw new Error('No se recibió URL de video');
+        throw new Error('لم يتم تلقي رابط الفيديو');
       }
 
       // Retornar resultado y servidor usado
@@ -43,14 +43,14 @@ const handler = async (m, { conn, text, command }) => {
 
     // Preparar datos para enviar video
     const caption = 
-      `✅ Video descargado correctamente.\n` +
-      `🎬 Título: ${result.title || 'N/A'}\n` +
-      `⏱ Duración: ${result.duration ? `${result.duration} seg` : 'N/A'}\n` +
-      `👍 Likes: ${result.likes || 'N/A'}\n` +
-      `💬 Comentarios: ${result.comments || 'N/A'}\n` +
-      `👁 Views: ${result.views || 'N/A'}\n` +
-      `📺 Calidad: ${result.quality || 'N/A'}\n` +
-      `📡 Procesado por: ${server.name}`;
+      `✅ تم تحميل الفيديو بنجاح.\n` +
+      `🎬 العنوان: ${result.title || 'غير متوفر'}\n` +
+      `⏱ المدة: ${result.duration ? `${result.duration} ثانية` : 'غير متوفر'}\n` +
+      `👍 الإعجابات: ${result.likes || 'غير متوفر'}\n` +
+      `💬 التعليقات: ${result.comments || 'غير متوفر'}\n` +
+      `👁 المشاهدات: ${result.views || 'غير متوفر'}\n` +
+      `📺 الجودة: ${result.quality || 'غير متوفر'}\n` +
+      `📡 معالج بواسطة: ${server.name}`;
 
     // Enviar video
     await conn.sendMessage(
