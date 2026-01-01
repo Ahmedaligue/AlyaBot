@@ -5,7 +5,7 @@ const filePath = './database/personalize.json';
 let handler = async (m) => {
     const data = JSON.parse(fs.readFileSync(filePath));
 
-    // Restablecer la personalización global al estado predeterminado
+    // إعادة ضبط التخصيص العام إلى الحالة الافتراضية
     data.global = {
         botName: null,
         currency: null,
@@ -13,7 +13,7 @@ let handler = async (m) => {
     };
 
     fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
-    m.reply('✅ Personalización global restablecida.');
+    m.reply('✅ تم إعادة ضبط التخصيص العام بنجاح.');
 };
 
 handler.help = ['resetpreferences'];
