@@ -1,8 +1,3 @@
-// Advertencia Modifica esto solo si sabes lo que haces 
-
-// esta madre funciona pero no tengo ni puta idea de como le hice para que funcione
-
-// este codigo es producto de 2 noches de lagrimas, sudor y mucho pero mucho cafe 
 
 
 process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '0';
