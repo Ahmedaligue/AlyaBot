@@ -1,51 +1,51 @@
 import { promises as fs } from 'fs';
 
-// Ruta del archivo harem.json
+// مسار ملف harem.json
 const haremFilePath = './database/harem.json';
 
-// Función para cargar el archivo harem.json
+// دالة لتحميل ملف harem.json
 async function loadHarem() {
     try {
         const data = await fs.readFile(haremFilePath, 'utf-8');
-        return JSON.parse(data); // Retornar el objeto completo
+        return JSON.parse(data); // إرجاع الكائن بالكامل
     } catch (error) {
-        throw new Error('No se pudo cargar el archivo harem.json.');
+        throw new Error('❌ لم يتمكن من تحميل ملف harem.json.');
     }
 }
 
-// Definición del handler del comando 'harem'
+// تعريف المعالج للأمر "harem"
 let handler = async (m, { conn }) => {
     try {
         const harem = await loadHarem();
         
-        // Obtener el ID del usuario que ejecuta el comando
-        const userId = m.sender; // m.sender contiene el ID del usuario
+        // الحصول على معرف المستخدم الذي نفذ الأمر
+        const userId = m.sender; // m.sender يحتوي على معرف المستخدم
 
-        // Verificar si el usuario tiene personajes en su harem
+        // التحقق إذا كان لدى المستخدم شخصيات في الهاريم
         const userHarem = harem[userId];
         if (!userHarem || userHarem.length === 0) {
-            await conn.reply(m.chat, 'No tienes personajes reclamados en tu harem.', m);
+            await conn.reply(m.chat, '⚠️ ليس لديك شخصيات مُطالبة في الهاريم.', m);
             return;
         }
 
-        // Crear mensaje con la lista de personajes y los nuevos datos
-        let message = '✨ *Personajes en tu Harem:*\n';
+        // إنشاء رسالة مع قائمة الشخصيات والبيانات الجديدة
+        let message = '✨ *الشخصيات في هاريمك:*\n';
         userHarem.forEach((character, index) => {
             message += `${index + 1}. ${character.name}\n`;
-            message += `   Situación Sentimental: ${character.relationship}\n`;
-            message += `   Origen: ${character.source}\n \n`;
+            message += `   الحالة العاطفية: ${character.relationship}\n`;
+            message += `   الأصل: ${character.source}\n \n`;
         });
 
-        // Enviar el mensaje con la lista de personajes y la imagen personalizada
+        // إرسال الرسالة مع قائمة الشخصيات وصورة مخصصة
         await conn.sendFile(m.chat, 'https://files.catbox.moe/bnjw8e.jpg', 'harem.jpg', message, m);
     } catch (error) {
-        await conn.reply(m.chat, `Error al cargar el harem: ${error.message}`, m);
+        await conn.reply(m.chat, `❌ خطأ أثناء تحميل الهاريم: ${error.message}`, m);
     }
 };
 
-// Configuración del comando
+// إعدادات الأمر
 handler.help = ['harem'];
 handler.tags = ['anime'];
-handler.command = /^(harem)$/i; // Comando "harem"
+handler.command = /^(harem|هاريم)$/i; // إضافة أمر "هاريم" بالعربية
 
 export default handler;
