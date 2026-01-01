@@ -1,21 +1,21 @@
 const handler = async (m, { args, text, conn, command }) => {
-  if (!text) return m.reply('Por favor, escribe una sugerencia. Ejemplo: .sug Agrega más comandos divertidos.');
+  if (!text) return m.reply('⚠️ من فضلك اكتب اقتراحاً. مثال: .sug أضف المزيد من الأوامر الممتعة.');
 
   const grupoSugerencias = '120363395553029777@g.us';
-  const sugerencia = `*Nueva sugerencia recibida:*\n\n"${text}"\n\n*Enviada por:* @${m.sender.split('@')[0]}`;
+  const sugerencia = `*اقتراح جديد تم استلامه:*\n\n"${text}"\n\n*أُرسل بواسطة:* @${m.sender.split('@')[0]}`;
 
-  // Enviar al grupo designado
+  // إرسال إلى المجموعة المخصصة
   await conn.sendMessage(grupoSugerencias, {
     text: sugerencia,
     mentions: [m.sender]
   });
 
-  // Confirmar al usuario
-  await m.reply('¡Gracias por tu sugerencia! Fue enviada correctamente al equipo del Staff.');
+  // تأكيد للمستخدم
+  await m.reply('✅ شكراً على اقتراحك! تم إرساله بنجاح إلى فريق الإدارة.');
 };
 
 handler.command = /^sug$/i;
-handler.help = ['sug <texto>'];
+handler.help = ['sug <النص>'];
 handler.tags = ['info'];
 handler.register = true;
 
