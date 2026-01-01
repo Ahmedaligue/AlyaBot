@@ -3,29 +3,29 @@ import path from 'path';
 import fetch from 'node-fetch';
 
 const dbPath = path.join(process.cwd(), 'db_users.json');
-const eventsUrl = 'https://raw.githubusercontent.com/Elpapiema/CharHub-Store/refs/heads/main/Random/rob-events.json'; // Reemplaza con la URL real
+const eventsUrl = 'https://raw.githubusercontent.com/Elpapiema/CharHub-Store/refs/heads/main/Random/rob-events.json'; // رابط ملف الأحداث
 
-// Función para leer JSON local
+// دالة لقراءة JSON محلي
 function readJSON(filePath) {
     if (!fs.existsSync(filePath)) return {};
     return JSON.parse(fs.readFileSync(filePath, 'utf-8'));
 }
 
-// Función para obtener la moneda personalizada
+// دالة للحصول على العملة المخصصة
 function getCurrency() {
     let personalizePath = path.join(process.cwd(), 'personalize.json');
     let personalizeData = readJSON(personalizePath);
-    return personalizeData.global?.currency || personalizeData.default?.currency || 'monedas';
+    return personalizeData.global?.currency || personalizeData.default?.currency || 'عملات';
 }
 
-// Función para obtener los eventos desde GitHub
+// دالة لجلب الأحداث من GitHub
 async function fetchEvents() {
     try {
         let res = await fetch(eventsUrl);
-        if (!res.ok) throw new Error('No se pudo obtener el JSON.');
+        if (!res.ok) throw new Error('لم يتمكن من جلب ملف JSON.');
         return await res.json();
     } catch (e) {
-        console.error('Error al obtener eventos de robo:', e);
+        console.error('خطأ أثناء جلب أحداث السرقة:', e);
         return { successful: [], failed: [] };
     }
 }
@@ -39,25 +39,25 @@ let handler = async (m, { conn, text }) => {
     let userData = db[userId] || { money: 0, bank: 0 };
     let currency = getCurrency();
 
-    let events = await fetchEvents(); // Obtener eventos desde GitHub
+    let events = await fetchEvents(); // جلب الأحداث من GitHub
 
     if (target && target.startsWith('@')) {
-        // Modo: Robar a un usuario específico
+        // وضع: سرقة مستخدم محدد
         let targetId = target.replace('@', '') + '@s.whatsapp.net';
 
         if (!db[targetId]) {
-            m.reply('❌ El usuario mencionado no está registrado en la base de datos.');
+            m.reply('❌ المستخدم المذكور غير مسجل في قاعدة البيانات.');
             return;
         }
 
         let targetData = db[targetId];
 
         if (targetData.money <= 0) {
-            m.reply(`❌ ${target} no tiene dinero en mano para robar.`);
+            m.reply(`❌ ${target} لا يملك مالاً في يده لتسرقه.`);
             return;
         }
 
-        let success = Math.random() < 0.3; // 30% de éxito
+        let success = Math.random() < 0.3; // نسبة نجاح 30%
         let amount = Math.floor(Math.random() * 200) + 50;
 
         if (success) {
@@ -68,17 +68,17 @@ let handler = async (m, { conn, text }) => {
             db[userId] = userData;
             fs.writeFileSync(dbPath, JSON.stringify(db, null, 2));
 
-            m.reply(`✅ ¡Lograste robar *${amount} ${currency}* a ${target}!`);
+            m.reply(`✅ لقد نجحت في سرقة *${amount} ${currency}* من ${target}!`);
         } else {
             let lostAmount = Math.floor(amount / 2);
             userData.money = Math.max(0, userData.money - lostAmount);
             db[userId] = userData;
             fs.writeFileSync(dbPath, JSON.stringify(db, null, 2));
 
-            m.reply(`❌ Fallaste en el robo y perdiste *${lostAmount} ${currency}* en el intento.`);
+            m.reply(`❌ فشلت في السرقة وخسرت *${lostAmount} ${currency}* أثناء المحاولة.`);
         }
     } else {
-        // Modo: Evento de robo aleatorio
+        // وضع: حدث سرقة عشوائي
         let isSuccess = Math.random() < 0.5;
         let eventList = isSuccess ? events.successful : events.failed;
         let event = eventList[Math.floor(Math.random() * eventList.length)];
@@ -88,7 +88,7 @@ let handler = async (m, { conn, text }) => {
             userData.money += amount;
         } else {
             amount = Math.min(amount, userData.money);
-            userData.money = Math.max(0, userData.money + amount);
+            userData.money = Math.max(0, userData.money - amount);
         }
 
         db[userId] = userData;
@@ -98,6 +98,6 @@ let handler = async (m, { conn, text }) => {
     }
 };
 
-handler.command = ['rob', 'robar', 'crime'];
+handler.command = ['rob', 'robar', 'crime', 'سرقة'];
 
 export default handler;
