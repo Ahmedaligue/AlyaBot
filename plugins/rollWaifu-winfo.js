@@ -2,7 +2,7 @@ import fetch from 'node-fetch';
 
 let handler = async (m, { args, usedPrefix, command }) => {
   if (!args[0]) {
-    return m.reply(`🔎 Usa el comando así:\n${usedPrefix + command} <nombre del personaje>`);
+    return m.reply(`🔎 استخدم الأمر هكذا:\n${usedPrefix + command} <اسم الشخصية>`);
   }
 
   const personajeBuscado = args.join(' ').toLowerCase();
@@ -10,30 +10,30 @@ let handler = async (m, { args, usedPrefix, command }) => {
 
   try {
     const res = await fetch(url);
-    if (!res.ok) throw new Error(`Error al obtener datos. Código: ${res.status}`);
+    if (!res.ok) throw new Error(`❌ خطأ في جلب البيانات. الكود: ${res.status}`);
     const data = await res.json();
 
     const personaje = data.find(p => p.name.toLowerCase().includes(personajeBuscado));
 
     if (!personaje) {
-      return m.reply(`❌ No se encontró ningún personaje que coincida con: *${args.join(' ')}*`);
+      return m.reply(`❌ لم يتم العثور على أي شخصية تطابق: *${args.join(' ')}*`);
     }
 
-    let info = `✨ *Información del Personaje*\n\n`;
-    info += `📛 *Nombre:* ${personaje.name}\n`;
-    if (personaje.age) info += `🎂 *Edad:* ${personaje.age}\n`;
-    if (personaje.source) info += `📺 *Origen:* ${personaje.source}\n`;
-    if (personaje.relationship) info += `💞 *Relación:* ${personaje.relationship}\n`;
+    let info = `✨ *معلومات الشخصية*\n\n`;
+    info += `📛 *الاسم:* ${personaje.name}\n`;
+    if (personaje.age) info += `🎂 *العمر:* ${personaje.age}\n`;
+    if (personaje.source) info += `📺 *الأصل:* ${personaje.source}\n`;
+    if (personaje.relationship) info += `💞 *العلاقة:* ${personaje.relationship}\n`;
 
     await conn.sendFile(m.chat, personaje.img, 'personaje.jpg', info, m);
   } catch (e) {
     console.error(e);
-    m.reply(`⚠️ Hubo un error al buscar el personaje. Intenta más tarde.`);
+    m.reply(`⚠️ حدث خطأ أثناء البحث عن الشخصية. حاول لاحقاً.`);
   }
 };
 
-handler.help = ['winfo <nombre>'];
+handler.help = ['winfo <اسم>'];
 handler.tags = ['anime', 'info'];
-handler.command = ['winfo'];
+handler.command = ['winfo', 'معلومات_وايفو'];
 
 export default handler;
