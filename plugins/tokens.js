@@ -1,10 +1,10 @@
 const handler = async (m, { conn }) => {
     const token = generateToken(8);
-    m.reply(`🔑 Token generado: *${token}*`);
+    m.reply(`🔑 تم إنشاء الرمز: *${token}*`);
 };
 
-handler.command = ['gettoken'];
-handler.rowner = true; // Solo los owners pueden usar este comando
+handler.command = ['الحصول_على_الرمز', 'gettoken'];
+handler.rowner = true; // فقط المالكين يمكنهم استخدام هذا الأمر
 
 function generateToken(length) {
     const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
