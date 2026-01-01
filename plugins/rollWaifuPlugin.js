@@ -1,58 +1,58 @@
 import { promises as fs } from 'fs';
 import fetch from 'node-fetch';
 
-// Ruta del archivo characters.json (remoto en GitHub)
+// رابط ملف characters.json (عن بُعد من GitHub)
 const charactersUrl = 'https://raw.githubusercontent.com/Elpapiema/CharHub-Store/refs/heads/main/image_json/characters.json';
 const filePath = './database/personalize.json';
 
-// Función para cargar el archivo characters.json desde GitHub
+// دالة لتحميل ملف characters.json من GitHub
 async function loadCharacters() {
     try {
         const res = await fetch(charactersUrl);
         const characters = await res.json();
         return characters;
     } catch (error) {
-        throw new Error('No se pudo cargar el archivo characters.json desde GitHub.');
+        throw new Error('❌ لم يتمكن من تحميل ملف characters.json من GitHub.');
     }
 }
 
-// Definición del handler del comando 'rw' o 'rollwaifu'
+// تعريف المعالج للأمر "rw" أو "rollwaifu"
 let handler = async (m, { conn }) => {
     try {
-        // Cargar moneda o algo asi xd 
+        // تحميل العملة من ملف personalize.json
         const data = JSON.parse(await fs.readFile(filePath));
         const globalConfig = data.global;
         const defaultConfig = data.default;
-        // Definicion de lo de arriba xd
         const currency = globalConfig.currency || defaultConfig.currency;
-        // Carga de personajes, si no le sabes no le muevas
+
+        // تحميل الشخصيات واختيار شخصية عشوائية
         const characters = await loadCharacters();
         const randomCharacter = characters[Math.floor(Math.random() * characters.length)];
 
-        // Mensaje de información del personaje
+        // رسالة معلومات الشخصية
         const message = `
-✨ *Nombre*: ${randomCharacter.name}
-🎂 *Edad*: ${randomCharacter.age} años
-💖 *Estado Sentimental*: ${randomCharacter.relationship}
-📚 *Origen*: ${randomCharacter.source}
-💵 *Costo*: ${randomCharacter.buy} ${currency}
+✨ *الاسم*: ${randomCharacter.name}
+🎂 *العمر*: ${randomCharacter.age} سنة
+💖 *الحالة العاطفية*: ${randomCharacter.relationship}
+📚 *الأصل*: ${randomCharacter.source}
+💵 *التكلفة*: ${randomCharacter.buy} ${currency}
         `;
 
-        // Enviar el mensaje con la información del personaje y la imagen
+        // إرسال الرسالة مع معلومات الشخصية والصورة
         const sentMsg = await conn.sendFile(m.chat, randomCharacter.img, `${randomCharacter.name}.jpg`, message, m);
 
-        // Almacenar el personaje generado con el ID del mensaje enviado por el bot
+        // تخزين الشخصية المولدة باستخدام معرف الرسالة المرسلة من البوت
         if (!global.lastCharacter) global.lastCharacter = {};
-        global.lastCharacter[sentMsg.key.id] = randomCharacter; // Guardar usando el ID del mensaje del bot
+        global.lastCharacter[sentMsg.key.id] = randomCharacter;
 
     } catch (error) {
-        await conn.reply(m.chat, `Error al cargar el personaje: ${error.message}`, m);
+        await conn.reply(m.chat, `❌ خطأ أثناء تحميل الشخصية: ${error.message}`, m);
     }
 };
 
-// Configuración del comando
-handler.help = ['rw', 'rollwaifu'];
+// إعدادات الأمر
+handler.help = ['rw', 'rollwaifu', 'رولوايفو'];
 handler.tags = ['anime'];
-handler.command = ['rw', 'rollwaifu']; // Comandos "rw" y "rollwaifu"
+handler.command = ['rw', 'rollwaifu', 'رولوايفو']; // إضافة أمر بالعربية
 
 export default handler;
