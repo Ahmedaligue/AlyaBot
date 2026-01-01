@@ -13,7 +13,7 @@ async function loadJSON(path, defaultValue = {}) {
             await fs.writeFile(path, JSON.stringify(defaultValue, null, 2));
             return defaultValue;
         } else {
-            throw new Error(`Error al cargar el archivo ${path}`);
+            throw new Error(`❌ خطأ أثناء تحميل الملف ${path}`);
         }
     }
 }
@@ -22,7 +22,7 @@ async function saveJSON(path, data) {
     try {
         await fs.writeFile(path, JSON.stringify(data, null, 2), 'utf-8');
     } catch (error) {
-        throw new Error(`Error al guardar el archivo ${path}`);
+        throw new Error(`❌ خطأ أثناء حفظ الملف ${path}`);
     }
 }
 
@@ -46,19 +46,19 @@ let handler = async (m, { conn }) => {
                 m.quoted.id?.startsWith('3EB0');
 
             if (!isFromBot) {
-                await conn.reply(m.chat, 'El mensaje al que estás respondiendo no contiene un personaje válido para reclamar.', m);
+                await conn.reply(m.chat, '⚠️ الرسالة التي ترد عليها لا تحتوي على شخصية صالحة للمطالبة.', m);
                 return;
             }
 
             character = global.lastCharacter?.[m.quoted.id];
 
             if (!character) {
-                await conn.reply(m.chat, 'No se pudo encontrar el personaje correspondiente. Asegúrate de responder al mensaje correcto.', m);
+                await conn.reply(m.chat, '❌ لم يتم العثور على الشخصية المقابلة. تأكد من الرد على الرسالة الصحيحة.', m);
                 return;
             }
 
         } else {
-            await conn.reply(m.chat, 'Ups, debes responder a un mensaje con un personaje para reclamarlo.', m);
+            await conn.reply(m.chat, '⚠️ يجب أن ترد على رسالة تحتوي على شخصية للمطالبة بها.', m);
             return;
         }
 
@@ -76,7 +76,7 @@ let handler = async (m, { conn }) => {
         if (userMoney + userBank < cost) {
             await conn.reply(
                 m.chat,
-                `❌ No tienes suficiente dinero para reclamar a ${character.name}.\n\nNecesitas ${cost} ${currency} en total.\n\nUsa #work para ganar dinero.`,
+                `❌ ليس لديك ما يكفي من المال للمطالبة بـ ${character.name}.\n\nتحتاج إلى ${cost} ${currency} إجمالاً.\n\nاستخدم #work لكسب المال.`,
                 m
             );
             return;
@@ -93,7 +93,7 @@ let handler = async (m, { conn }) => {
         if (!harem[m.sender]) harem[m.sender] = [];
 
         if (harem[m.sender].some(c => c.name === character.name)) {
-            await conn.reply(m.chat, `❗ Ya has reclamado a ${character.name}.`, m);
+            await conn.reply(m.chat, `❗ لقد طالبت بالفعل بـ ${character.name}.`, m);
             return;
         }
 
@@ -104,16 +104,16 @@ let handler = async (m, { conn }) => {
 
         await conn.reply(
             m.chat,
-            `✅ Has reclamado a ${character.name} con éxito.\n\nSe descontaron ${cost} ${currency}.\n\nSaldo actual:\n💰 Dinero en mano: ${usersDb[m.sender].money} ${currency}\n🏦 Dinero en el Banco: ${usersDb[m.sender].bank} ${currency}`,
+            `✅ لقد طالبت بـ ${character.name} بنجاح.\n\nتم خصم ${cost} ${currency}.\n\nرصيدك الحالي:\n💰 المال في اليد: ${usersDb[m.sender].money} ${currency}\n🏦 المال في البنك: ${usersDb[m.sender].bank} ${currency}`,
             m
         );
     } catch (error) {
-        await conn.reply(m.chat, `❌ Error al reclamar el personaje: ${error.message}`, m);
+        await conn.reply(m.chat, `❌ خطأ أثناء المطالبة بالشخصية: ${error.message}`, m);
     }
 };
 
 handler.help = ['claim'];
 handler.tags = ['anime'];
-handler.command = ['claim', 'c', 'reclamar'];
+handler.command = ['claim', 'c', 'reclamar', 'مطالبة'];
 
 export default handler;
