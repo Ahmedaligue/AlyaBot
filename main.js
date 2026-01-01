@@ -4,7 +4,6 @@
 
 // este codigo es producto de 2 noches de lagrimas, sudor y mucho pero mucho cafe 
 
-// Agradezco al dev de LunaBotv6 por compartir soluciones
 
 process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '0';
 import './config.js'; 
